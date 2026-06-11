@@ -11,7 +11,6 @@ import {
   Home,
   Loader2,
   RotateCcw,
-  Sparkles,
   Star,
   Trophy,
 } from "lucide-react";
@@ -301,6 +300,23 @@ function scrollPicksPanelToEnd() {
   });
 }
 
+function scrollPicksPanelToTop() {
+  window.requestAnimationFrame(() => {
+    const panel = document.querySelector<HTMLElement>("[data-picks-scroll-panel]");
+    const page = document.querySelector<HTMLElement>("[data-picks-page]");
+
+    panel?.scrollTo({
+      behavior: "smooth",
+      top: 0,
+    });
+
+    page?.scrollTo({
+      behavior: "smooth",
+      top: 0,
+    });
+  });
+}
+
 function isStepComplete(stepId: StepId, picks: PicksState) {
   switch (stepId) {
     case "supporting-team":
@@ -414,6 +430,7 @@ export function PicksWizard({
   function setActiveStep(nextStepIndex: number) {
     showStepLoading();
     setStepIndex(clampStepIndex(nextStepIndex));
+    scrollPicksPanelToTop();
   }
 
   function updatePick<Key extends keyof PicksState>(
@@ -728,16 +745,7 @@ export function PicksWizard({
                     Next
                     <ArrowRight className="size-4" />
                   </Button>
-                ) : (
-                  <Button
-                    type="button"
-                    disabled
-                    className="h-9 rounded-full bg-mauve px-4 text-xs text-mauve-foreground sm:h-11 sm:px-6 sm:text-sm"
-                  >
-                    Cards come next
-                    <Sparkles className="size-4" />
-                  </Button>
-                )}
+                ) : null}
               </div>
             </footer>
           </section>
@@ -1373,7 +1381,7 @@ function ReviewStep({
                 Share card previews
               </p>
               <h3 className="mt-2 text-xl font-black tracking-tight text-foreground">
-                Your selected picks as square posts
+                Your selected picks 
               </h3>
             </div>
             <div className="flex flex-col gap-2 sm:flex-row">
@@ -1388,7 +1396,7 @@ function ReviewStep({
                 ) : (
                   <Download className="size-4" />
                 )}
-                {isDownloadingAll ? "Downloading..." : "Download all"}
+                {isDownloadingAll ? "Downloading..." : "Download all as ZIP"}
               </Button>
               <CapCutTemplateDialog />
             </div>
@@ -1585,8 +1593,11 @@ function CapCutTemplateDialog() {
           </p>
           <p>
             <span className="font-black text-foreground">3.</span> Select the
-            images in preview order: "My Picks" first, your selections next, and the
-            World Cup logo last.
+            images in preview order:
+          </p>
+          <p>
+            <span className="font-black text-foreground">4.</span> Clear reset
+            text on the CapCut template.
           </p>
           <p className="rounded-xl border border-border bg-background/45 p-3">
             The template works best if you also completed the optional picks.
@@ -1598,7 +1609,7 @@ function CapCutTemplateDialog() {
             className="h-10 rounded-full bg-mauve px-5 text-mauve-foreground hover:bg-mauve/90"
           >
             <a
-              href="https://www.capcut.com/tv2/ZSQysWSNe/"
+              href="https://www.capcut.com/tv2/ZSQyKKm8T/"
               rel="noreferrer"
               target="_blank"
             >
