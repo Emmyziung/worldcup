@@ -21,9 +21,9 @@ export const metadata: Metadata = {
     url: "/picks",
     images: [
       {
-        url: "/assets/my_picks.png",
-        width: 1024,
-        height: 1536,
+        url: "/assets/og-image.png",
+        width: 630,
+        height: 1200,
         alt: "My World Cup Picks",
       },
     ],
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "World Cup Picks",
     description: "Make your World Cup picks and turn them into shareable cards.",
-    images: ["/assets/my_picks.png"],
+    images: ["/assets/og-image.png"],
   },
 };
 
